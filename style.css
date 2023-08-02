@@ -1,0 +1,159 @@
+
+
+* {
+    font-family: 'Roboto', sans-serif;
+   color: white;
+   margin: 0;
+  }
+
+section {
+    padding-top: 5px;
+    background-color: #DDECFE;
+    display: flex;
+   flex-direction: column;
+   align-items: center;
+   border-radius: 23px;
+   height: 884px;
+}
+
+input {
+width: 280px;
+height: 42px;
+background: #132C4C;
+border: 1px white solid;
+border-radius: 23px;
+padding: 0 30px;
+}
+
+input::placeholder {
+    color: white;
+}
+
+input:focus {
+    outline: none;
+  }
+
+.main-section {
+display: flex;
+flex-direction: column;
+background: #132C4C;
+border-radius: 15px;
+gap: 1rem;
+padding: 10px;
+width: 335px;
+height: 700px;
+}
+
+.info-for-box {
+    display: flex;
+    align-items: center;
+     justify-content: space-between;
+    align-items: center;
+}
+
+.box-one {
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+width: 165px;
+padding: 2px;
+height: 61px;
+background: #FF7452;
+border-radius: 15px;
+}
+
+.day-time {
+    display: flex;
+    font-size: 16px;
+    gap: 35px;
+}
+
+
+
+.for-waether {
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    padding: 1rem;
+    background-color: rgba(0, 99, 212, 0.2);
+}
+
+.info-box{
+    display: grid;
+    width: 300px;
+    height: 300px;
+    align-items: center;
+    border-radius: 8px;
+    padding: 1rem;
+    background-color: rgba(0, 99, 212, 0.2);
+}
+
+.info-box tbody {
+    display: grid;
+    gap: 1rem;
+}
+
+tr {
+    color: rgb(255, 255, 255);
+    border-bottom: 1px solid rgba(170, 167, 167,0.5);
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.box-two {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 10px;
+    width: 120px;
+    height: 44px;
+    background: rgba(0, 99, 212, 0.9);
+    border-radius: 15px;
+}
+
+
+
+span {
+    font-size: 24px;
+   position: absolute;
+   top: 10px;
+}
+
+
+
+.for-waether img {
+    width: 80px;
+}
+
+.temp {
+    font-size: 62px;
+    position: relative;
+}
+
+
+.icon-condi {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h2 {
+    font-size: 16px;
+    text-align: center;
+    font-weight: 400;
+    width: 150px;
+}
+
+.box-two p {
+    font-size: 10px;
+}
+
+#city {
+    font-size: 22px;
+}
+
