@@ -1,10 +1,17 @@
 
 
 * {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Open Sans', sans-serif;
    color: white;
    margin: 0;
+   box-sizing: border-box;
   }
+
+  ::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+  }
+  
 
 section {
     padding-top: 5px;
@@ -12,21 +19,22 @@ section {
     display: flex;
    flex-direction: column;
    align-items: center;
-   border-radius: 23px;
-   height: 884px;
+   height: 100vh;
 }
 
+
+
 input {
-width: 280px;
+width: 100%;
 height: 42px;
-background: #132C4C;
-border: 1px white solid;
+background: #fdfdfe;
 border-radius: 23px;
 padding: 0 30px;
+border: none;
 }
 
 input::placeholder {
-    color: white;
+    color: rgb(111, 111, 111);
 }
 
 input:focus {
@@ -38,36 +46,74 @@ display: flex;
 flex-direction: column;
 background: #132C4C;
 border-radius: 15px;
-gap: 1rem;
+gap: .7rem;
+padding: 15px 10px;
+width: 650px;
+}
+
+.title {
+padding: 5px;
+color: #ffffff;
+background-color:rgb(252, 127, 24);
+border-radius: 8px;
+width: 250px;
+text-align: center;
+font-size: 34px;
 padding: 10px;
-width: 335px;
-height: 700px;
 }
 
-.info-for-box {
+.hourlyForcast, .daylyForcast{
     display: flex;
-    align-items: center;
-     justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    border-radius: 8px;
+    padding: .5rem;
+    background-color: rgba(0, 99, 212, 0.2);
 }
 
-.box-one {
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-padding: 0px;
-width: 165px;
-padding: 2px;
-height: 61px;
-background: #FF7452;
-border-radius: 15px;
+.hourlyForcast h2{
+    padding-bottom: 20px;
+    font-size: 16px;
+    font-weight: 100;
 }
+
+ul {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    overflow: auto;
+    padding: 0;
+}
+
+.daylyForcast ul {
+    justify-content: center;
+    overflow: hidden;
+}
+
+.hourlyBox{
+    padding: 0 30px  ;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid rgba(84, 155, 237, 0.4);
+}
+
+.daylyBox {
+    width: 200px;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid rgba(84, 155, 237, 0.4);
+}
+
 
 .day-time {
     display: flex;
     font-size: 16px;
-    gap: 35px;
+    gap: 5rem;
 }
 
 
@@ -75,15 +121,22 @@ border-radius: 15px;
 .for-waether {
     display: flex;
     align-items: center;
+    justify-content: space-around;
     border-radius: 8px;
-    padding: 1rem;
+    padding: 5px 0;
     background-color: rgba(0, 99, 212, 0.2);
+    /* background-image: url("images/sonny.png"); */
+}
+
+.current {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
 }
 
 .info-box{
     display: grid;
-    width: 300px;
-    height: 300px;
     align-items: center;
     border-radius: 8px;
     padding: 1rem;
@@ -93,6 +146,7 @@ border-radius: 15px;
 .info-box tbody {
     display: grid;
     gap: 1rem;
+    grid-template-columns: auto auto auto;
 }
 
 tr {
@@ -100,21 +154,32 @@ tr {
     border-bottom: 1px solid rgba(170, 167, 167,0.5);
     display: flex;
     justify-content: space-between;
+    
 }
 
+th {
+    font-weight: 300;
+    
+}
 
 .box-two {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    padding: 10px;
-    width: 120px;
-    height: 44px;
-    background: rgba(0, 99, 212, 0.9);
-    border-radius: 15px;
+    border-radius: 5px;
+    gap: .5rem;
+    padding: 10px 10px 10px 15px;
 }
 
+.box-two p {
+    font-size: 18px;
+}
+
+.box-two h2 {
+    font-size: 28px;
+    text-align: start;
+}
 
 
 span {
@@ -140,20 +205,33 @@ span {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 80px;
 }
 
 h2 {
-    font-size: 16px;
-    text-align: center;
-    font-weight: 400;
-    width: 150px;
-}
-
-.box-two p {
-    font-size: 10px;
-}
-
-#city {
     font-size: 22px;
+    text-align: center;
+    font-weight: 500;
 }
+
+.city_country {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.city_country h2 {
+    font-size: 36px;
+    
+}
+
+.city_country p {
+    font-size: 20px;
+    font-weight: 100;
+}
+
+h3 {
+    color: rgb(255, 183, 124);
+}
+
 

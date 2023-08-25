@@ -5,36 +5,55 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <script src="index.js" type="module"></script>
+    <script src="index.js"  type="module"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <title>Document</title>
 </head>
 <body>
 
     <section id="container">
         <div class="main-section">
+          <h1 class="title">Weather now</h1>
             <form id="my-form">
                 <input id="search-input" type="text"  placeholder="Search here....">
             </form>
-            <div class="info-for-box">
-                <div class="box-one">
-                    <h1>Weather now</h1>
-                    <div class="day-time">
-                        <p id="current-day">--</p>
-                        <p id="current-time">--</p>
+            <div class="for-waether">
+                <div class="current">
+                    <div class="icon-condi">
+                        <img id="icon"  alt="waether">
+                        <h2 id="desc">--</h2>
                     </div>
+                        <div class="temp" id="temp"> -- </div>
                 </div>
                 <div class="box-two">
-                    <div   id="city"></div>
-                    <p id="Country"></p>
+                    <div class="city_country">
+                        <h2  id="city"></h2>
+                        <p id="Country"></p>
+                    </div> 
+                    <div class="weather_now">
+                        <div class="day-time">
+                            <p class="weather_now_day" id="current-day">--</p>
+                            <p class="weather_now_time" id="current-time">--</p>
+                        </div>
+                    </div>
+                  </div>
                 </div>
-            </div>
-            <div class="for-waether">
-                <div class="icon-condi">
-                    <img id="icon"  alt="waether">
-                    <h2 id="desc">--</h2>
+             <div>
+                <h3>Hourly Forecast</h3>
+                <div class="hourlyForcast">
+                    <ul id="hourlyList">
+                    </ul>
                 </div>
-                    <div class="temp" id="temp"> -- </div>
-            </div>
+             </div>
+             <div>
+              <h3>Dayly Forecast</h3>
+              <div class="daylyForcast">
+                  <ul id="daylyList">
+                  </ul>
+              </div>
+           </div>
+
             <div class="info-box">
                 <table>
                     <tr>
@@ -65,6 +84,14 @@
                         <th>Pressure</th>
                         <td id="pressure">Gas giant</td>
                       </tr>
+                      <tr>
+                        <th>Feels like</th>
+                        <td id="feel">Gas giant</td>
+                    </tr>
+                    <tr>
+                      <th>Is day</th>
+                      <td id="gust">1</td>
+                  </tr>
                   </table>
             </div>
         </div>

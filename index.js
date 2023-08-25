@@ -1,5 +1,7 @@
 const apiKey = "61a7207d514a4a119aa151602230206";
 
+// Selecting DOM elements
+
 const inputSearch = document.getElementById("my-form");
 const cityInput = document.getElementById("search-input");
 const cityDisplay = document.getElementById("city");
@@ -18,7 +20,8 @@ const pressure = document.getElementById("pressure");
 const windGust = document.getElementById("windgust");
 const uiIndex = document.getElementById("ui-index");
 const feelsLike = document.getElementById("feel");
-const gust = document.getElementById("gust");
+
+// Function to update the current time and day
 
 function updateCurrentTime() {
   const currentTime = new Date();
@@ -36,20 +39,23 @@ function updateCurrentTime() {
 
 updateCurrentTime();
 
+// Function to handle hourly weather data
+
 function hourlyWeatherData(data) {
+  // Extract hourly data for the first day
+
   const hourlyData = data.forecast.forecastday[0].hour;
   const currentHour = new Date().getHours();
 
-  // Фильтруем данные для показа от текущего часа до конца дня (24:00)
+  // Filter data for the remaining hours of the day
   const nextHours = hourlyData.filter((hourData) => {
     const hour = parseInt(hourData.time.split(" ")[1].split(":")[0]);
     return hour >= currentHour && hour < 24;
   });
 
-  // Очищаем список перед добавлением новых элементов
   const hourlyList = document.getElementById("hourlyList");
-  hourlyList.innerHTML = "";
 
+  // Create list items for each hour's data
   nextHours.forEach((hourData) => {
     const time = Math.floor(
       parseInt(hourData.time.split(" ")[1].split(":")[0])
@@ -80,20 +86,20 @@ function hourlyWeatherData(data) {
   });
 }
 
+// Function to handle dayly weather data
 function daylyWeatherData(data) {
   const daylyData = data.forecast.forecastday; // Получаем массив данных по дням
   const currentDay = new Date().getDate();
 
-  // Фильтруем данные для показа следующих 3 дней
+  // Filter data for the next 3 days
   const nextDays = daylyData.filter((dayData) => {
-    const day = new Date(dayData.date).getDate(); // Используем дату из данных
-    return day >= currentDay && day < currentDay + 3; // Показываем следующие 3 дня
+    const day = new Date(dayData.date).getDate();
+    return day >= currentDay && day < currentDay + 3;
   });
 
-  // Очищаем список перед добавлением новых элементов
   const daylyList = document.getElementById("daylyList");
-  daylyList.innerHTML = "";
 
+  // Create list items for each day's data
   nextDays.forEach((dayData) => {
     const tempC = dayData.day.avgtemp_c;
     const condIcon = dayData.day.condition.icon;
@@ -122,6 +128,8 @@ function daylyWeatherData(data) {
   });
 }
 
+// Function to fetch weather data by city
+
 function getWeatherByCity(city) {
   const url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=3&hour=1-24`;
 
@@ -140,6 +148,7 @@ function getWeatherByCity(city) {
     });
 }
 
+// Function to update weather data in the UI
 function updateWeatherData(data) {
   const cityName = data.location.name;
   const countryName = data.location.country;
@@ -155,12 +164,13 @@ function updateWeatherData(data) {
   const currentWindGust = data.current.gust_mph;
   const currentUi = data.current.uv;
   const currentFells = data.current.feelslike_c;
-  const currentGust = 
 
   const formattedTime = new Date(localTime).toLocaleTimeString([], {
     hour: "2-digit",
     minute: "2-digit",
   });
+
+  // Updating UI elements with weather data
 
   feelsLike.textContent = `${currentFells}°`;
   uiIndex.innerHTML = currentUi;
@@ -179,7 +189,10 @@ function updateWeatherData(data) {
   weatherDescription.textContent = conditionText;
 }
 
+// Fetch weather data for initial city (Stavanger)
 getWeatherByCity("Stavanger");
+
+// Add event listener for form submission
 
 inputSearch.addEventListener("submit", function (event) {
   event.preventDefault();
