@@ -53,7 +53,9 @@ function hourlyWeatherData(data) {
     return hour >= currentHour && hour < 24;
   });
 
+  // Clear the hourly list before adding new elements
   const hourlyList = document.getElementById("hourlyList");
+  hourlyList.innerHTML = "";
 
   // Create list items for each hour's data
   nextHours.forEach((hourData) => {
@@ -97,7 +99,9 @@ function daylyWeatherData(data) {
     return day >= currentDay && day < currentDay + 3;
   });
 
+  // Clear the daily list before adding new elements
   const daylyList = document.getElementById("daylyList");
+  daylyList.innerHTML = "";
 
   // Create list items for each day's data
   nextDays.forEach((dayData) => {
