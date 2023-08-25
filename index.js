@@ -17,6 +17,8 @@ const visibility = document.getElementById("visibility");
 const pressure = document.getElementById("pressure");
 const windGust = document.getElementById("windgust");
 const uiIndex = document.getElementById("ui-index");
+const feelsLike = document.getElementById("feel");
+const gust = document.getElementById("gust");
 
 function updateCurrentTime() {
   const currentTime = new Date();
@@ -34,8 +36,94 @@ function updateCurrentTime() {
 
 updateCurrentTime();
 
+function hourlyWeatherData(data) {
+  const hourlyData = data.forecast.forecastday[0].hour;
+  const currentHour = new Date().getHours();
+
+  // Фильтруем данные для показа от текущего часа до конца дня (24:00)
+  const nextHours = hourlyData.filter((hourData) => {
+    const hour = parseInt(hourData.time.split(" ")[1].split(":")[0]);
+    return hour >= currentHour && hour < 24;
+  });
+
+  // Очищаем список перед добавлением новых элементов
+  const hourlyList = document.getElementById("hourlyList");
+  hourlyList.innerHTML = "";
+
+  nextHours.forEach((hourData) => {
+    const time = Math.floor(
+      parseInt(hourData.time.split(" ")[1].split(":")[0])
+    );
+    const tempC = hourData.temp_c;
+    const condIcon = hourData.condition.icon;
+
+    const listItem = document.createElement("li");
+    listItem.classList.add("hourlyBox");
+
+    const timeParagraph = document.createElement("p");
+    if (time === currentHour) {
+      timeParagraph.textContent = "NOW";
+    } else {
+      timeParagraph.textContent = hourData.time.split(" ")[1];
+    }
+    listItem.appendChild(timeParagraph);
+
+    const imageIcon = document.createElement("img");
+    imageIcon.setAttribute("src", condIcon);
+    listItem.appendChild(imageIcon);
+
+    const tempParagraph = document.createElement("p");
+    tempParagraph.textContent = `${tempC}°C`;
+    listItem.appendChild(tempParagraph);
+
+    hourlyList.appendChild(listItem);
+  });
+}
+
+function daylyWeatherData(data) {
+  const daylyData = data.forecast.forecastday; // Получаем массив данных по дням
+  const currentDay = new Date().getDate();
+
+  // Фильтруем данные для показа следующих 3 дней
+  const nextDays = daylyData.filter((dayData) => {
+    const day = new Date(dayData.date).getDate(); // Используем дату из данных
+    return day >= currentDay && day < currentDay + 3; // Показываем следующие 3 дня
+  });
+
+  // Очищаем список перед добавлением новых элементов
+  const daylyList = document.getElementById("daylyList");
+  daylyList.innerHTML = "";
+
+  nextDays.forEach((dayData) => {
+    const tempC = dayData.day.avgtemp_c;
+    const condIcon = dayData.day.condition.icon;
+    const date = new Date(dayData.date).toLocaleDateString(undefined, {
+      weekday: "long",
+      day: "numeric",
+      month: "short",
+    });
+
+    const listItem = document.createElement("li");
+    listItem.classList.add("daylyBox");
+
+    const dateParagraph = document.createElement("p");
+    dateParagraph.textContent = date;
+    listItem.appendChild(dateParagraph);
+
+    const imageIcon = document.createElement("img");
+    imageIcon.setAttribute("src", condIcon);
+    listItem.appendChild(imageIcon);
+
+    const tempParagraph = document.createElement("p");
+    tempParagraph.textContent = `${tempC}°C`;
+    listItem.appendChild(tempParagraph);
+
+    daylyList.appendChild(listItem);
+  });
+}
+
 function getWeatherByCity(city) {
-  const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`;
+  const url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=3&hour=1-24`;
 
   fetch(url)
     .then((response) => {
@@ -43,6 +131,8 @@ function getWeatherByCity(city) {
     })
     .then((data) => {
       console.log(data);
+      daylyWeatherData(data);
+      hourlyWeatherData(data);
       updateWeatherData(data);
     })
     .catch((error) => {
@@ -64,12 +154,15 @@ function updateWeatherData(data) {
   const currentPressure = data.current.pressure_mb;
   const currentWindGust = data.current.gust_mph;
   const currentUi = data.current.uv;
+  const currentFells = data.current.feelslike_c;
+  const currentGust = 
 
   const formattedTime = new Date(localTime).toLocaleTimeString([], {
     hour: "2-digit",
     minute: "2-digit",
   });
 
+  feelsLike.textContent = `${currentFells}°`;
   uiIndex.innerHTML = currentUi;
   windGust.textContent = `${currentWindGust} km`;
   pressure.textContent = `${currentPressure} mb`;
@@ -82,7 +175,7 @@ function updateWeatherData(data) {
   cityDisplay.textContent = cityName;
   document.getElementById("Country").textContent = countryName;
   currentIcon.innerHTML = conditionIcon;
-  temperature.innerHTML = `${currentTemp} <span>℃</span>`;
+  temperature.innerHTML = `${currentTemp} <span>°C</span>`;
   weatherDescription.textContent = conditionText;
 }
 
